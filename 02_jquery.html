@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+                /* 실습예제 */
+        ul,ol,li{list-style: none;}
+        .pig *{margin: 0px;padding: 0px;}
+        .pig {
+            width: 340px;height: 378px;
+            border: 3px solid #000;
+            overflow: hidden;
+        }
+        .pig .p_slide, .pig .p_btn{display: flex;}
+        .pig .p_slide{
+            width: 1000px;
+            position: relative;
+        }
+        .pig .p_btn{
+            justify-content: center;
+            transform: translateY(-20px);
+        }
+        .pig .p_btn>li{
+            width: 10px; height: 10px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            margin: 0px 3px 0px 3px;
+            transition: 0.3s;
+        }
+        .act02{
+            background: #fff !important;
+            width: 30px !important;
+            border-radius: 10px 10px 10px 10px !important;
+        }
+    </style>
+
+
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <script>
+           $(document).ready(function(){
+         // 실습예제
+
+            // 전역변수
+            let p=$(this).index();
+
+            $('.pig .p_btn li').first().addClass('act02');
+
+            $('.pig .p_btn li').click(function(){
+                
+                p=$(this).index();
+                
+                $('.pig .p_slide').stop().animate({'left':-(p_img*p)},500)
+
+                $('.pig .p_btn li').removeClass('act02');
+                $(this).addClass('act02');
+            })
+
+            let p_img=$('.pig .p_slide img').width();
+            
+            function auto(p){
+                console.log(p);
+                $('.pig .p_slide').stop().animate({'left':-((p_img)*p)},500);
+            }
+
+            function moveLeft(p){
+                if(p==2){
+                    p=0;
+                }else{
+                    p++;
+                }
+                auto(p);//조건식에 나온 변수값을 auto로 넘겨준다
+            
+            }
+
+            let Timer=setInterval(moveLeft,3000)
+
+        });
+    </script>
+    
+</head>
+<body>
+    <article class="pig">
+        <ul class="p_slide">
+            <li><a href="#" title=""><img src="./img/01.jpg" alt=""></a></li>
+            <li><a href="#" title=""><img src="./img/02.jpg" alt=""></a></li>
+            <li><a href="#" title=""><img src="./img/03.jpg" alt=""></a></li>
+        </ul>
+        <ul class="p_btn">
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+        </ul>
+    </article>
+</body>
+</html>
